@@ -16,12 +16,64 @@ Company.destroy_all
 
 # 2. insert new rows in companies table
 
+#companies = Company.all.count
+#puts "There are #{Company.all.count} companies"
+
+new_company = Company.new
+new_company["name"] = "Apple"
+new_company["city"] = "Cupertino"
+new_company["state"] = "CA"
+new_company["url"] = "https://apple.com"
+new_company.save
+puts new_company.inspect
+
+#puts "There are #{Company.all.count} companies"
+
+new_company = Company.new
+new_company["name"] = "Amazon"
+new_company["city"] = "Seattle"
+new_company["state"] = "WA"
+new_company.save
+puts new_company.inspect
+
+#puts "There are #{Company.all.count} companies"
+
+new_company = Company.new
+new_company["name"] = "Google"
+new_company["city"] = "Mountain View"
+new_company["state"] = "CA"
+new_company.save
+puts new_company.inspect
+
+puts "There are #{Company.all.count} companies"
+
 # 3. query companies table to find all row with California company
+#Arrays are collection of rows and Hashes are the identifiers of the row 
+
+cali_companies = Company.where({ "state" => "CA" })
+puts cali_companies.inspect
+
+puts "California companies: #{cali_companies.count}"
 
 # 4. query companies table to find single row for Apple
 
+apple = Company.find_by({ "name" => "Apple"})
+puts apple.inspect
+
 # 5. read a row's column value
 
-# 6. update a row's column value
+puts apple["url"]
 
-# 7. delete a row
+# 6. update a row's column value
+amazon = Company.find_by({ "name" => "Amazon" })
+
+amazon["url"] = "https://amazon.com"
+amazon.save
+puts amazon.inspect
+
+# 7. delete a row ---> Don't use .delete, always use .destroy
+
+google = Company.find_by({ "name" => "Google" })
+google.destroy
+
+puts "California companies: #{cali_companies.count}"
